@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">HabbitsList</string>
+    <string name="logo">HabbitsList</string>
+    <string name="new_habbit_creation">New Habbit Creation</string>
+    <string name="create_new_habbit_btn">Create new habbit</string>
+    <string name="habbit_name_hint">Enter name of habbit</string>
+    <string name="habbit_description_hint">Enter description of habbit</string>
+    <string name="habbit_details_title">Details of Habbit</string>
+</resources>
