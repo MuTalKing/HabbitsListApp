@@ -11,6 +11,8 @@ class HabbitDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_habbit_detail)
 
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         val nameField: TextView = findViewById(R.id.name_details_field)
         val descriptionField: TextView = findViewById(R.id.description_details_field)
 

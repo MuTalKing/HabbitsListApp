@@ -19,16 +19,19 @@ class MainActivity : AppCompatActivity() {
     lateinit var createNewHabbitButton: Button
     lateinit var listView: ListView
     lateinit var adapter: HabbitsListAdapter
-    lateinit var mLatestHabbit: Habbit
-    val listHabbits = arrayListOf<Habbit>()
+    var mLatestHabbit: Habbit? = null
+    val savedHabbitsList = arrayListOf<Habbit>()
+    var listHabbits = arrayListOf<Habbit>()
 
     private val mGetHabbit: ActivityResultLauncher<Unit> =
         registerForActivityResult(
             HabbitCreationActivityContract(),  // Callback to be called when event is received
             ActivityResultCallback<Habbit> { result -> // Save as latest event received
                 mLatestHabbit = result
-                listHabbits.add(mLatestHabbit)
-                adapter.notifyDataSetChanged()
+                if(mLatestHabbit != null) {
+                    listHabbits.add(mLatestHabbit!!)
+                    adapter.notifyDataSetChanged()
+                }
             }
         )
 
@@ -60,5 +63,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun openHabbitCreationActivity() {
         mGetHabbit.launch(null)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.putParcelableArrayList("savedHabbits", listHabbits)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        listHabbits = savedInstanceState.get("savedHabbits") as ArrayList<Habbit>
     }
 }
